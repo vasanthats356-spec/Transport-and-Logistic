@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Stackly Transport and Logistics </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== PRELOADER STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #e8f4f0;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e8f4f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            overflow: hidden;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* ===== BRAND LOGO ===== */
+        .brand-logo {
+            margin-bottom: 30px;
+            animation: logo-appear 1s ease-out;
+        }
+
+        .brand-logo img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-logo .logo-text {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #1a3a34;
+            letter-spacing: -1px;
+        }
+
+        .brand-logo .logo-text span {
+            color: #d4a843;
+        }
+
+        .brand-logo .logo-sub {
+            font-size: 0.7rem;
+            color: #5a7a74;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        @keyframes logo-appear {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== ANIMATED TRUCK ICON ===== */
+        .truck-animation {
+            position: relative;
+            width: 120px;
+            height: 100px;
+            margin: 0 auto 30px;
+        }
+
+        .truck-animation .truck-body {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            width: 90px;
+            height: 40px;
+            background: #1a3a34;
+            border-radius: 6px 6px 0 0;
+            animation: truckDrive 2s ease-in-out infinite;
+        }
+
+        .truck-animation .truck-body::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -20px;
+            width: 40px;
+            height: 30px;
+            background: #1a3a34;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .truck-animation .truck-body .window {
+            position: absolute;
+            top: -8px;
+            right: -14px;
+            width: 16px;
+            height: 12px;
+            background: #8fcbdf;
+            border-radius: 3px 3px 0 0;
+            border: 2px solid #1a3a34;
+            z-index: 2;
+        }
+
+        .truck-animation .truck-body .line {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            right: 15px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-50%);
+        }
+
+        .truck-animation .truck-body .line2 {
+            position: absolute;
+            top: 70%;
+            left: 15px;
+            right: 15px;
+            height: 2px;
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-50%);
+        }
+
+        .truck-animation .wheel {
+            position: absolute;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            background: #1a3a34;
+            border-radius: 50%;
+            border: 3px solid #d4a843;
+            animation: wheelSpin 1.5s linear infinite;
+        }
+
+        .truck-animation .wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: #d4a843;
+            border-radius: 50%;
+        }
+
+        .truck-animation .wheel-front {
+            right: 10px;
+        }
+
+        .truck-animation .wheel-back {
+            left: 18px;
+        }
+
+        @keyframes truckDrive {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(-0.5deg); }
+        }
+
+        @keyframes wheelSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== ROAD LINE ===== */
+        .road-line {
+            width: 200px;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, #d4a843 0px, #d4a843 15px, transparent 15px, transparent 25px);
+            animation: roadMove 0.8s linear infinite;
+            margin: 5px auto 0;
+        }
+
+        @keyframes roadMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 25px 0; }
+        }
+
+        /* ===== LOADING TEXT ===== */
+        .loading-text {
+            color: #1a3a34;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+
+        .loading-text .highlight {
+            color: #d4a843;
+        }
+
+        /* ===== DOTS ANIMATION ===== */
+        .dots {
+            display: inline-flex;
+            gap: 8px;
+            margin-left: 5px;
+        }
+
+        .dots span {
+            width: 7px;
+            height: 7px;
+            background: #d4a843;
+            border-radius: 50%;
+            display: inline-block;
+            animation: dot-bounce 1.4s ease-in-out infinite;
+        }
+
+        .dots span:nth-child(1) { animation-delay: 0s; }
+        .dots span:nth-child(2) { animation-delay: 0.2s; }
+        .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dot-bounce {
+            0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+            40% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-wrapper {
+            max-width: 350px;
+            margin: 20px auto 0;
+            position: relative;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(26, 58, 52, 0.08);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #d4a843, #c49a3d, #d4a843);
+            background-size: 200% 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            position: relative;
+            animation: progressShimmer 1.5s infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .progress-percentage {
+            color: #5a7a74;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(212, 168, 67, 0.15);
+            border-radius: 50%;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 14s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 12s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 16s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 13s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 15s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 11s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; animation-duration: 14s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; animation-duration: 12s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; animation-duration: 18s; }
+        .particle:nth-child(11) { left: 45%; animation-delay: 0.5s; animation-duration: 13s; }
+        .particle:nth-child(12) { left: 75%; animation-delay: 4s; animation-duration: 16s; }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+            25% { transform: translateY(-80px) scale(1.5); opacity: 0.5; }
+            50% { transform: translateY(-160px) scale(0.5); opacity: 0.1; }
+            75% { transform: translateY(-240px) scale(1.2); opacity: 0.8; }
+        }
+
+        /* ===== TAGLINE ===== */
+        .tagline {
+            color: #a0b8b0;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .tagline span {
+            color: #d4a843;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .truck-animation {
+                width: 100px;
+                height: 85px;
+            }
+
+            .truck-animation .truck-body {
+                width: 75px;
+                height: 34px;
+            }
+
+            .truck-animation .truck-body::after {
+                width: 34px;
+                height: 26px;
+                right: -16px;
+            }
+
+            .truck-animation .truck-body .window {
+                width: 14px;
+                height: 10px;
+                right: -12px;
+                top: -7px;
+            }
+
+            .truck-animation .wheel {
+                width: 16px;
+                height: 16px;
+            }
+
+            .truck-animation .wheel-front {
+                right: 8px;
+            }
+
+            .truck-animation .wheel-back {
+                left: 14px;
+            }
+
+            .brand-logo .logo-text {
+                font-size: 1.8rem;
+            }
+
+            .brand-logo img {
+                height: 55px;
+            }
+
+            .loading-text {
+                font-size: 0.95rem;
+            }
+
+            .progress-wrapper {
+                max-width: 280px;
+            }
+
+            .road-line {
+                width: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .truck-animation {
+                width: 80px;
+                height: 70px;
+            }
+
+            .truck-animation .truck-body {
+                width: 60px;
+                height: 28px;
+            }
+
+            .truck-animation .truck-body::after {
+                width: 28px;
+                height: 22px;
+                right: -14px;
+            }
+
+            .truck-animation .truck-body .window {
+                width: 12px;
+                height: 8px;
+                right: -10px;
+                top: -6px;
+            }
+
+            .truck-animation .wheel {
+                width: 14px;
+                height: 14px;
+            }
+
+            .truck-animation .wheel-front {
+                right: 6px;
+            }
+
+            .truck-animation .wheel-back {
+                left: 10px;
+            }
+
+            .brand-logo .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .brand-logo img {
+                height: 85px;
+            }
+
+            .brand-logo .logo-sub {
+                font-size: 0.55rem;
+                letter-spacing: 2px;
+            }
+
+            .loading-text {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            .dots span {
+                width: 6px;
+                height: 6px;
+                gap: 6px;
+            }
+
+            .progress-wrapper {
+                max-width: 220px;
+            }
+
+            .progress-bar-bg {
+                height: 5px;
+            }
+
+            .progress-percentage {
+                font-size: 0.65rem;
+            }
+
+            .tagline {
+                font-size: 0.55rem;
+                letter-spacing: 2px;
+            }
+
+            .road-line {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .truck-animation {
+                width: 65px;
+                height: 60px;
+            }
+
+            .truck-animation .truck-body {
+                width: 50px;
+                height: 24px;
+            }
+
+            .truck-animation .truck-body::after {
+                width: 24px;
+                height: 18px;
+                right: -12px;
+            }
+
+            .truck-animation .truck-body .window {
+                width: 10px;
+                height: 6px;
+                right: -8px;
+                top: -5px;
+            }
+
+            .truck-animation .wheel {
+                width: 12px;
+                height: 12px;
+            }
+
+            .truck-animation .wheel-front {
+                right: 4px;
+            }
+
+            .truck-animation .wheel-back {
+                left: 8px;
+            }
+
+            .brand-logo .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .brand-logo img {
+                height: 38px;
+            }
+
+            .loading-text {
+                font-size: 0.75rem;
+            }
+
+            .progress-wrapper {
+                max-width: 180px;
+            }
+        }
+
+        /* ===== FADE IN ANIMATION ===== */
+        .preloader-content {
+            animation: fade-in 0.8s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ===== PROGRESS COMPLETE ===== */
+        .preloader-content.complete .progress-bar-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            animation: none;
+        }
+
+        .preloader-content.complete .progress-bar-fill::after {
+            display: none;
+        }
+
+        .preloader-content.complete .progress-percentage {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div class="preloader" id="preloader">
+        <!-- Floating Particles -->
+        <div class="particles">
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+        </div>
+
+        <div class="preloader-content" id="preloaderContent">
+            <!-- Brand Logo -->
+            <div class="brand-logo">
+                <img src="Stackly.webp" alt="Stackly Logistics" onerror="this.src='https://placehold.co/180x70/d4a843/white?text=STACKLY'">
+            </div>
+
+            <!-- Animated Truck -->
+            <div class="truck-animation">
+                <div class="truck-body">
+                    <div class="window"></div>
+                    <div class="line"></div>
+                    <div class="line2"></div>
+                </div>
+                <div class="wheel wheel-back"></div>
+                <div class="wheel wheel-front"></div>
+            </div>
+
+            <!-- Road Line -->
+            <div class="road-line"></div>
+
+            <!-- Loading Text with Dots -->
+            <div class="loading-text">
+                <span class="highlight">Loading</span><span class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-wrapper">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-percentage" id="progressText">0%</div>
+            </div>
+
+            <!-- Tagline -->
+            <div class="tagline">Moving Your <span>Business</span> Forward</div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== DOM Elements =====
+            const preloader = document.getElementById('preloader');
+            const preloaderContent = document.getElementById('preloaderContent');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            // ===== Progress Bar Simulation =====
+            let progress = 0;
+            const speed = 0.6;
+            const interval = 25;
+
+            function updateProgress() {
+                progress += speed;
+
+                // Slow down near the end for realistic feel
+                if (progress > 75) {
+                    progress += speed * 0.2;
+                }
+                if (progress > 90) {
+                    progress += speed * 0.1;
+                }
+
+                if (progress >= 100) {
+                    progress = 100;
+                    progressFill.style.width = '100%';
+                    progressText.textContent = '100%';
+                    preloaderContent.classList.add('complete');
+                    
+                    // Redirect to home.html after 800ms
+                    setTimeout(function() {
+                        window.location.href = 'home.html';
+                    }, 800);
+                    return;
+                }
+
+                progressFill.style.width = progress + '%';
+                progressText.textContent = Math.floor(progress) + '%';
+                setTimeout(updateProgress, interval);
+            }
+
+            // ===== Start Progress Bar =====
+            setTimeout(updateProgress, 400);
+
+            // ===== Alternative: Force redirect after max time =====
+            setTimeout(function() {
+                if (progress < 100) {
+                    progress = 100;
+                    progressFill.style.width = '100%';
+                    progressText.textContent = '100%';
+                    preloaderContent.classList.add('complete');
+                    
+                    setTimeout(function() {
+                        window.location.href = 'home.html';
+                    }, 800);
+                }
+            }, 6000);
+
+            // ===== Prevent Scroll During Loader =====
+            document.body.style.overflow = 'hidden';
+
+            // ===== Console Message =====
+            console.log('%c🚛 Stackly Logistics | Preloader', 'color: #d4a843; font-size: 16px; font-weight: bold;');
+            console.log('%c📍 Moving Your Business Forward', 'color: #1a3a34; font-size: 12px;');
+
+            // ===== Keyboard Shortcut: Skip Loader (for testing) =====
+            document.addEventListener('keydown', function(e) {
+                // Press 'S' key to skip loader and redirect
+                if (e.key === 's' && !preloader.classList.contains('hidden')) {
+                    progress = 100;
+                    progressFill.style.width = '100%';
+                    progressText.textContent = '100%';
+                    preloaderContent.classList.add('complete');
+                    
+                    setTimeout(function() {
+                        window.location.href = 'home.html';
+                    }, 300);
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

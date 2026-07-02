@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Transport and Logistic - Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #0f172a;
+            line-height: 1.5;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(rgba(26, 58, 52, 0.85), rgba(26, 58, 52, 0.85)), 
+                        url('tracking1.webp') center/cover no-repeat fixed;
+            min-height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 80px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            word-wrap: break-word;
+        }
+
+        .hero-content h1 span {
+            color: #d4a843;
+        }
+
+        .hero-content .breadcrumb {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.8);
+            flex-wrap: wrap;
+        }
+
+        .hero-content .breadcrumb a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        .hero-content .breadcrumb a:hover {
+            color: #d4a843;
+        }
+        .hero-content .breadcrumb i {
+            color: #d4a843;
+            font-size: 12px;
+        }
+        .hero-content .breadcrumb span {
+            color: #d4a843;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .hero-divider {
+            width: 100px;
+            height: 4px;
+            background: #d4a843;
+            margin: 25px auto 0;
+            border-radius: 4px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #d4a843;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.35);
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-btn:hover {
+            background: #c49a3d;
+            transform: translateY(-3px);
+        }
+
+        /* ===== SECTION 2: TRACKING FORM ===== */
+        .tracking-form-section {
+            padding: 60px 20px;
+            background: #ffffff;
+            width: 100%;
+        }
+
+        .tracking-form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .tracking-form-wrapper {
+            background: #f8f9fa;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(212, 168, 67, 0.12);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+        }
+
+        .tracking-form-wrapper .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+        }
+
+        .tracking-form-wrapper .input-group {
+            position: relative;
+        }
+
+        .tracking-form-wrapper .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0b8b0;
+            font-size: 1rem;
+        }
+
+        .tracking-form-wrapper input {
+            width: 100%;
+            padding: 16px 18px 16px 48px;
+            border: 2px solid #e8f0ec;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            color: #1a3a34;
+            background: white;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .tracking-form-wrapper input:focus {
+            border-color: #d4a843;
+            box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.1);
+        }
+
+        .tracking-form-wrapper input.error {
+            border-color: #ef4444;
+        }
+
+        .tracking-form-wrapper .error-message {
+            font-size: 0.75rem;
+            color: #dc2626;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .tracking-form-wrapper .error-message.show {
+            display: block;
+        }
+
+        .track-btn {
+            padding: 16px 30px;
+            background: linear-gradient(135deg, #d4a843, #c49a3d);
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .track-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.35);
+        }
+
+        .track-btn i {
+            transition: 0.3s;
+        }
+
+        .track-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        .tracking-hint {
+            text-align: center;
+            color: #5a7a74;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+
+        /* ===== SECTION 3: TRACKING STATUS ===== */
+        .tracking-status-section {
+            padding: 60px 20px;
+            background: linear-gradient(rgba(26, 58, 52, 0.92), rgba(26, 58, 52, 0.92)), 
+                        url('tracking2.webp') center/cover no-repeat fixed;
+            width: 100%;
+            color: white;
+        }
+
+        .tracking-status-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .status-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .status-step {
+            text-align: center;
+            padding: 25px 15px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s;
+        }
+
+        .status-step:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-5px);
+        }
+
+        .status-step .icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 168, 67, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.6rem;
+            color: #d4a843;
+        }
+
+        .status-step .step-number {
+            font-size: 0.7rem;
+            color: #d4a843;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .status-step h4 {
+            font-size: 1.05rem;
+            margin: 8px 0;
+            color: white;
+        }
+
+        .status-step p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+        }
+
+        /* ===== SECTION 4: LIVE MAP ===== */
+        .live-map-section {
+            padding: 60px 20px;
+            background: #ffffff;
+            width: 100%;
+        }
+
+        .live-map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .map-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid rgba(212, 168, 67, 0.1);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            display: block;
+        }
+
+        /* ===== SECTION 5: TRACKING STATS ===== */
+        .tracking-stats-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+            width: 100%;
+        }
+
+        .tracking-stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .tracking-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .tracking-stat-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(212, 168, 67, 0.08);
+            transition: 0.3s;
+        }
+
+        .tracking-stat-item:hover {
+            transform: translateY(-5px);
+            border-color: #d4a843;
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.08);
+        }
+
+        .tracking-stat-item .number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #d4a843;
+        }
+
+        .tracking-stat-item .label {
+            color: #5a7a74;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        /* ===== SECTION 6: VIDEO TESTIMONIAL ===== */
+        .video-section {
+            padding: 60px 20px;
+            background: #ffffff;
+            width: 100%;
+        }
+
+        .video-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            max-width: 100%;
+            background: #f0f4f8;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== SECTION 7: DELIVERY OPTIONS ===== */
+        .delivery-options-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+            width: 100%;
+        }
+
+        .delivery-options-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .delivery-options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .delivery-option-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid rgba(212, 168, 67, 0.08);
+            transition: 0.3s;
+            overflow: hidden;
+        }
+
+        .delivery-option-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4a843;
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.08);
+        }
+
+        .delivery-option-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 18px;
+        }
+
+        .delivery-option-card h4 {
+            font-size: 1.2rem;
+            color: #1a3a34;
+        }
+
+        .delivery-option-card p {
+            color: #5a7a74;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 8px 0 15px;
+        }
+
+        .delivery-option-card .opt-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid #d4a843;
+            color: #d4a843;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .delivery-option-card .opt-btn:hover {
+            background: #d4a843;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== SECTION 8: TRACKING HISTORY ===== */
+        .history-section {
+            padding: 60px 20px;
+            background: #ffffff;
+            width: 100%;
+        }
+
+        .history-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .history-item {
+            display: flex;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(212, 168, 67, 0.06);
+            align-items: center;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item .icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 168, 67, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4a843;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .history-item .content {
+            flex: 1;
+        }
+
+        .history-item .content .title {
+            font-weight: 600;
+            color: #1a3a34;
+        }
+
+        .history-item .content .desc {
+            color: #5a7a74;
+            font-size: 0.9rem;
+        }
+
+        .history-item .time {
+            color: #a0b8b0;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .history-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #d4a843, #c49a3d);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .history-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.3);
+        }
+
+        /* ===== SECTION 9: FAQ ===== */
+        .faq-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+            width: 100%;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(212, 168, 67, 0.08);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: #d4a843;
+        }
+
+        .faq-question {
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a3a34;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            color: #d4a843;
+        }
+
+        .faq-question i {
+            transition: 0.3s;
+            color: #d4a843;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s;
+            padding: 0 22px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 22px 20px;
+        }
+
+        .faq-answer p {
+            color: #5a7a74;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== SECTION 10: CTA ===== */
+        .cta-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a3a34, #2a4a44);
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-container h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+        }
+
+        .cta-container h2 span {
+            color: #d4a843;
+        }
+
+        .cta-container p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.05rem;
+            margin: 15px 0 30px;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: #d4a843;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: 0.3s;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.35);
+        }
+
+        .cta-btn:hover {
+            background: #c49a3d;
+            transform: translateY(-3px);
+        }
+
+        /* ===== SECTION 11: PARTNERS ===== */
+        .partners-section {
+            padding: 50px 20px;
+            background: #ffffff;
+            width: 100%;
+        }
+
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .partner-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(212, 168, 67, 0.06);
+            transition: 0.3s;
+        }
+
+        .partner-item:hover {
+            border-color: #d4a843;
+            transform: scale(1.05);
+        }
+
+        .partner-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .partner-item p {
+            font-size: 0.85rem;
+            color: #1a3a34;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* ===== SECTION 12: MOBILE APP ===== */
+        .mobile-app-section {
+            padding: 60px 20px;
+            background: #f8f9fa;
+            width: 100%;
+        }
+
+        .mobile-app-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .mobile-app-content h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1a3a34;
+        }
+
+        .mobile-app-content h2 span {
+            color: #d4a843;
+        }
+
+        .mobile-app-content p {
+            color: #5a7a74;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 15px 0 25px;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .app-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            background: #1a3a34;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .app-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .app-btn i {
+            font-size: 1.8rem;
+        }
+
+        .app-btn .app-text {
+            text-align: left;
+        }
+
+        .app-btn .app-text small {
+            font-size: 0.6rem;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .app-btn .app-text span {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .mobile-app-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .mobile-app-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .tracking-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .delivery-options-grid { grid-template-columns: repeat(2, 1fr); }
+            .partners-grid { grid-template-columns: repeat(3, 1fr); }
+            .mobile-app-container { grid-template-columns: 1fr; gap: 30px; }
+            .mobile-app-image { order: -1; }
+        }
+
+        @media (max-width: 900px) {
+            .status-timeline { grid-template-columns: repeat(2, 1fr); }
+            .tracking-form-wrapper .form-row { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .map-wrapper iframe { height: 350px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { min-height: 350px; padding: 60px 15px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .tracking-form-wrapper { padding: 25px 18px; }
+            .status-timeline { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .status-step { padding: 18px 12px; }
+            .status-step .icon { width: 45px; height: 45px; font-size: 1.2rem; }
+            .tracking-stats-grid { grid-template-columns: 1fr 1fr; }
+            .delivery-options-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: repeat(2, 1fr); }
+            .history-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .history-item .time { white-space: normal; }
+            .mobile-app-content h2 { font-size: 2rem; }
+            .cta-container h2 { font-size: 2rem; }
+            .delivery-option-card img { height: 180px; }
+        }
+
+        @media (max-width: 600px) {
+            .tracking-form-wrapper { padding: 20px 15px; }
+            .tracking-form-wrapper input { padding: 12px 14px 12px 40px; font-size: 0.9rem; }
+            .track-btn { padding: 12px 20px; font-size: 0.9rem; }
+            .status-timeline { grid-template-columns: 1fr 1fr; }
+            .tracking-stats-grid { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr 1fr; }
+            .app-buttons { flex-direction: column; }
+            .app-btn { width: 100%; justify-content: center; }
+            .map-wrapper iframe { height: 250px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .video-wrapper { border-radius: 16px; }
+            .faq-question { font-size: 0.9rem; padding: 14px 16px; }
+            .faq-answer { padding: 0 16px; }
+            .faq-item.active .faq-answer { padding: 0 16px 15px; }
+            .cta-container h2 { font-size: 1.8rem; }
+            .cta-btn { padding: 14px 30px; font-size: 0.95rem; }
+            .delivery-option-card img { height: 150px; }
+            .mobile-app-image img { height: 200px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2rem; }
+            .hero-section { min-height: 300px; padding: 40px 15px; }
+            .tracking-form-wrapper { padding: 16px 12px; }
+            .status-timeline { grid-template-columns: 1fr; }
+            .partners-grid { grid-template-columns: 1fr; }
+            .tracking-stat-item .number { font-size: 2.2rem; }
+            .delivery-option-card img { height: 130px; }
+            .mobile-app-image img { height: 180px; }
+        }
+
+        /* AOS tweaks */
+        [data-aos] {
+            transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Ensure all images and iframes are responsive */
+        img, iframe, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Section title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1a3a34;
+        }
+
+        .section-title h2 span {
+            color: #d4a843;
+        }
+
+        .section-title p {
+            color: #5a7a74;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER PLACEHOLDER ===== -->
+    <div id="header-placeholder"></div> 
+
+    <!-- ===== SECTION 1: HERO ===== -->
+    <section class="hero-section" data-aos="fade-down" data-aos-duration="1000">
+        <div class="hero-content">
+            <h1>Track Your <span>Shipment</span></h1>
+            <p>Real-time tracking for all your logistics needs. Enter your tracking number to get instant updates.</p>
+            <div class="breadcrumb">
+                <a href="home.html">Home</a> <i class="fas fa-chevron-right"></i> <span>Tracking</span>
+            </div>
+            <div class="hero-divider"></div>
+            <a href="404.html" class="hero-btn">Track Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: TRACKING FORM ===== -->
+    <section class="tracking-form-section" id="trackingForm" data-aos="fade-up" data-aos-duration="800">
+        <div class="tracking-form-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Track Your <span>Package</span></h2>
+                <p>Enter your tracking number to get real-time updates</p>
+            </div>
+            <div class="tracking-form-wrapper" data-aos="zoom-in" data-aos-delay="100">
+                <div class="form-row">
+                    <div class="input-group">
+                        <i class="fas fa-box"></i>
+                        <input type="text" id="trackingInput" placeholder="Enter your tracking number (e.g., STACK-12345)">
+                    </div>
+                    <button class="track-btn" onclick="trackShipment()">
+                        <i class="fas fa-search"></i> Track Now
+                    </button>
+                </div>
+                <div id="trackingError" class="error-message">Please enter a valid tracking number</div>
+                <div class="tracking-hint">Enter your tracking number to get real-time updates</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: TRACKING STATUS ===== -->
+    <section class="tracking-status-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="tracking-status-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2><span>Shipment Journey</span></h2>
+                <p>Track your package every step of the way</p>
+            </div>
+            <div class="status-timeline">
+                <div class="status-step" data-aos="flip-up" data-aos-delay="100">
+                    <div class="icon"><i class="fas fa-box"></i></div>
+                    <div class="step-number">Step 1</div>
+                    <h4>Order Placed</h4>
+                    <p>Your order has been confirmed</p>
+                </div>
+                <div class="status-step" data-aos="flip-up" data-aos-delay="200">
+                    <div class="icon"><i class="fas fa-warehouse"></i></div>
+                    <div class="step-number">Step 2</div>
+                    <h4>Processing</h4>
+                    <p>Being packed and ready for dispatch</p>
+                </div>
+                <div class="status-step" data-aos="flip-up" data-aos-delay="300">
+                    <div class="icon"><i class="fas fa-truck"></i></div>
+                    <div class="step-number">Step 3</div>
+                    <h4>In Transit</h4>
+                    <p>On the way to your destination</p>
+                </div>
+                <div class="status-step" data-aos="flip-up" data-aos-delay="400">
+                    <div class="icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="step-number">Step 4</div>
+                    <h4>Delivered</h4>
+                    <p>Successfully delivered to you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: LIVE MAP ===== -->
+    <section class="live-map-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="live-map-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Live <span>Tracking</span></h2>
+                <p>Real-time location of your shipment</p>
+            </div>
+            <div class="map-wrapper" data-aos="zoom-in" data-aos-delay="100">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.372956843392!2d77.6174273!3d12.874509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14f6b8b8b8b9%3A0x8b8b8b8b8b8b8b8b!2sSNN%20Raj%20Serenity!5e0!3m2!1sen!2sin!4v1234567890!5m2!1sen!2sin" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 5: TRACKING STATS ===== -->
+    <section class="tracking-stats-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="tracking-stats-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Tracking <span>Performance</span></h2>
+                <p>Numbers that define our tracking excellence</p>
+            </div>
+            <div class="tracking-stats-grid">
+                <div class="tracking-stat-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="number">50K+</div>
+                    <div class="label">Shipments Tracked</div>
+                </div>
+                <div class="tracking-stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="number">99.9%</div>
+                    <div class="label">Tracking Accuracy</div>
+                </div>
+                <div class="tracking-stat-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="number">24/7</div>
+                    <div class="label">Real-time Updates</div>
+                </div>
+                <div class="tracking-stat-item" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="number">4.9★</div>
+                    <div class="label">Customer Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 6: VIDEO TESTIMONIAL ===== -->
+    <section class="video-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="video-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>What Our <span>Customers</span> Say</h2>
+                <p>Real stories from real people about their tracking experience</p>
+            </div>
+            <div class="video-wrapper" data-aos="zoom-in" data-aos-delay="100">
+                <video controls poster="tracking2.webp">
+                    <source src="tl3.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 7: DELIVERY OPTIONS ===== -->
+    <section class="delivery-options-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="delivery-options-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Delivery <span>Options</span></h2>
+                <p>Choose the delivery that suits your needs</p>
+            </div>
+            <div class="delivery-options-grid">
+                <div class="delivery-option-card" data-aos="flip-left" data-aos-delay="100">
+                    <img src="tracking3.webp" alt="Express">
+                    <h4>Express Delivery</h4>
+                    <p>Same-day or next-day delivery for urgent shipments. Priority handling.</p>
+                    <a href="404.html" class="opt-btn">Learn More</a>
+                </div>
+                <div class="delivery-option-card" data-aos="flip-left" data-aos-delay="200">
+                    <img src="tracking4.webp" alt="Standard">
+                    <h4>Standard Delivery</h4>
+                    <p>Reliable delivery within 3-5 business days. Cost-effective solution.</p>
+                    <a href="404.html" class="opt-btn">Learn More</a>
+                </div>
+                <div class="delivery-option-card" data-aos="flip-left" data-aos-delay="300">
+                    <img src="tracking5.webp" alt="International">
+                    <h4>International Shipping</h4>
+                    <p>Global shipping to over 190+ countries with customs clearance.</p>
+                    <a href="404.html" class="opt-btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 8: TRACKING HISTORY ===== -->
+    <section class="history-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="history-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Recent <span>Tracking History</span></h2>
+                <p>Recently tracked shipments on our platform</p>
+            </div>
+            <div class="history-item" data-aos="fade-right" data-aos-delay="100">
+                <div class="icon"><i class="fas fa-box"></i></div>
+                <div class="content">
+                    <div class="title">#STACK-12345</div>
+                    <div class="desc">Electronics - Bengaluru to Mumbai</div>
+                </div>
+                <div class="time">2 hours ago</div>
+            </div>
+            <div class="history-item" data-aos="fade-right" data-aos-delay="200">
+                <div class="icon"><i class="fas fa-check-circle"></i></div>
+                <div class="content">
+                    <div class="title">#STACK-12346</div>
+                    <div class="desc">Furniture - Delhi to Chennai</div>
+                </div>
+                <div class="time">5 hours ago</div>
+            </div>
+            <div class="history-item" data-aos="fade-right" data-aos-delay="300">
+                <div class="icon"><i class="fas fa-truck"></i></div>
+                <div class="content">
+                    <div class="title">#STACK-12347</div>
+                    <div class="desc">Medical Supplies - Pune to Hyderabad</div>
+                </div>
+                <div class="time">1 day ago</div>
+            </div>
+            <div class="history-item" data-aos="fade-right" data-aos-delay="400">
+                <div class="icon"><i class="fas fa-clock"></i></div>
+                <div class="content">
+                    <div class="title">#STACK-12348</div>
+                    <div class="desc">Automotive Parts - Mumbai to Delhi</div>
+                </div>
+                <div class="time">2 days ago</div>
+            </div>
+            <div style="text-align:center;">
+                <a href="404.html" class="history-btn">View Full History <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 9: FAQ ===== -->
+    <section class="faq-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="faq-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Frequently <span>Asked Questions</span></h2>
+                <p>Quick answers to common tracking questions</p>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How do I track my shipment? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Enter your tracking number in the search box above and click "Track Now". You'll get real-time updates on your shipment's location and status.</p>
+                </div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How long does delivery take? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Express delivery takes 1-2 days, standard delivery takes 3-5 days, and international delivery takes 5-10 days.</p>
+                </div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    What if my tracking number doesn't work? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Double-check your tracking number. If it still doesn't work, contact our support team for assistance.</p>
+                </div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Can I change my delivery address? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can change your delivery address before dispatch. Contact our support team to make changes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 10: CTA ===== -->
+    <section class="cta-section" data-aos="zoom-in" data-aos-duration="1000">
+        <div class="cta-container">
+            <h2>Need Help <span>Tracking</span> Your Shipment?</h2>
+            <p>Our support team is available 24/7 to help you track your shipment and answer any questions.</p>
+            <a href="404.html" class="cta-btn">Contact Support <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 11: PARTNERS ===== -->
+    <section class="partners-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="partners-container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Trusted <span>Partners</span></h2>
+                <p>We work with the best in the industry</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-item" data-aos="flip-up" data-aos-delay="100">
+                    <img src="tracking8.webp" alt="Blue Dart">
+                    <p>Blue Dart</p>
+                </div>
+                <div class="partner-item" data-aos="flip-up" data-aos-delay="200">
+                    <img src="tracking7.webp" alt="Maersk">
+                    <p>Maersk</p>
+                </div>
+                <div class="partner-item" data-aos="flip-up" data-aos-delay="300">
+                    <img src="tracking6.webp" alt="Air India Cargo">
+                    <p>Air India Cargo</p>
+                </div>
+                <div class="partner-item" data-aos="flip-up" data-aos-delay="400">
+                    <img src="tracking5.webp" alt="Amazon Logistics">
+                    <p>Amazon Logistics</p>
+                </div>
+                <div class="partner-item" data-aos="flip-up" data-aos-delay="500">
+                    <img src="tracking4.webp" alt="VRL Logistics">
+                    <p>VRL Logistics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 12: MOBILE APP ===== -->
+    <section class="mobile-app-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="mobile-app-container">
+            <div class="mobile-app-content" data-aos="fade-right" data-aos-duration="800">
+                <h2>Track on the <span>Go</span></h2>
+                <p>Download our mobile app to track your shipments anytime, anywhere. Get real-time notifications and updates on your smartphone.</p>
+                <div class="app-buttons">
+                    <a href="404.html" class="app-btn">
+                        <i class="fab fa-apple"></i>
+                        <div class="app-text">
+                            <small>Download on the</small>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                    <a href="404.html" class="app-btn">
+                        <i class="fab fa-google-play"></i>
+                        <div class="app-text">
+                            <small>Get it on</small>
+                            <span>Google Play</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="mobile-app-image" data-aos="fade-left" data-aos-duration="800">
+                <img src="tracking1.webp" alt="Mobile App">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER PLACEHOLDER ===== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // ===== Load Header and Footer =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load Header
+            fetch('header.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Header not found');
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                    initHeader();
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    document.getElementById('header-placeholder').innerHTML = '<div style="background:#d4a843; color:white; padding:10px; text-align:center;">Header failed to load</div>';
+                });
+
+            // Load Footer
+            fetch('footer.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Footer not found');
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                    initFooter();
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    document.getElementById('footer-placeholder').innerHTML = '<div style="background:#0a1628; color:#a0aec0; padding:20px; text-align:center;">Footer failed to load</div>';
+                });
+        });
+
+        // ===== Initialize Header =====
+        function initHeader() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (hamburgerBtn && mobileMenu) {
+                hamburgerBtn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                });
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        window.location.href = page + '.html';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    if (page) {
+                        window.location.href = page + '.html';
+                    }
+                    if (hamburgerBtn && mobileMenu) {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            const getStartedBtn = document.getElementById('getStartedBtn');
+            if (getStartedBtn) {
+                getStartedBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'signup.html';
+                });
+            }
+
+            const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+            if (mobileLoginBtn) {
+                const newMobileLoginBtn = mobileLoginBtn.cloneNode(true);
+                mobileLoginBtn.parentNode.replaceChild(newMobileLoginBtn, mobileLoginBtn);
+                newMobileLoginBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            const mobileGetStartedBtn = document.getElementById('mobileGetStartedBtn');
+            if (mobileGetStartedBtn) {
+                const newMobileGetStartedBtn = mobileGetStartedBtn.cloneNode(true);
+                mobileGetStartedBtn.parentNode.replaceChild(newMobileGetStartedBtn, mobileGetStartedBtn);
+                newMobileGetStartedBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.location.href = 'signup.html';
+                });
+            }
+
+            const logoSect = document.querySelector('.logo-section');
+            if (logoSect) {
+                logoSect.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                });
+            }
+
+            console.log('🚛 Header initialized');
+        }
+
+        // ===== Initialize Footer =====
+        function initFooter() {
+            const subscribeBtn = document.getElementById('footerSubscribeBtn');
+            const emailInput = document.getElementById('footerEmail');
+            const emailError = document.getElementById('footerEmailError');
+
+            function validateEmail(email) {
+                return /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(email);
+            }
+
+            if (subscribeBtn) {
+                subscribeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = emailInput.value.trim();
+                    
+                    if (!email) {
+                        emailError.classList.add('show');
+                        emailError.textContent = 'Please enter your email address';
+                        emailInput.classList.add('error');
+                    } else if (!validateEmail(email)) {
+                        emailError.classList.add('show');
+                        emailError.textContent = 'Please enter a valid email address';
+                        emailInput.classList.add('error');
+                    } else {
+                        emailError.classList.remove('show');
+                        emailInput.classList.remove('error');
+                        window.location.href = '404.html';
+                    }
+                });
+            }
+
+            if (emailInput) {
+                emailInput.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        emailError.classList.remove('show');
+                        this.classList.remove('error');
+                    }
+                });
+            }
+        }
+
+        // ===== Handle Window Resize =====
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const hamburgerBtn = document.getElementById('hamburgerBtn');
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (hamburgerBtn && mobileMenu) {
+                    hamburgerBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+
+        // ===== AOS Init =====
+        AOS.init({
+            once: false,
+            mirror: true,
+            duration: 900,
+            offset: 20,
+            easing: 'ease-out-cubic'
+        });
+
+        // ===== FAQ Toggle =====
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // ===== Tracking Function =====
+        function trackShipment() {
+            const input = document.getElementById('trackingInput');
+            const error = document.getElementById('trackingError');
+            const value = input.value.trim();
+
+            if (!value || value.length < 5) {
+                input.classList.add('error');
+                error.classList.add('show');
+                return;
+            }
+
+            input.classList.remove('error');
+            error.classList.remove('show');
+            window.location.href = '404.html';
+        }
+
+        // ===== Enter Key Support =====
+        document.getElementById('trackingInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                trackShipment();
+            }
+        });
+
+        // ===== Remove Error on Input =====
+        document.getElementById('trackingInput').addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.remove('error');
+                document.getElementById('trackingError').classList.remove('show');
+            }
+        });
+
+        console.log('%c🚛 Stackly Logistics | Tracking Page', 'color: #d4a843; font-size: 16px; font-weight: bold;');
+        console.log('%c📍 Real-time shipment tracking', 'color: #1a3a34; font-size: 12px;');
+    </script>
+
+    <!-- ===== HIDE ERROR MESSAGES INITIALLY ===== -->
+    <style>
+        .error-message { display: none; }
+        .input-group input.error { border-color: #ef4444 !important; }
+    </style>
+
+</body>
+</html>

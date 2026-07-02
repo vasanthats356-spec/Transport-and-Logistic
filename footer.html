@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Transport and Logistics - Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            color: #1a3a34;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== FOOTER - LIGHT TEAL ===== */
+        .footer {
+            background: #d4e8e0;
+            color: #1a3a34;
+            width: 100%;
+            margin-top: auto;
+            border-top: 3px solid #d4a843;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 32px 30px;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            text-decoration: none;
+        }
+
+        .footer-logo img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+            transition: opacity 0.3s;
+        }
+
+        .footer-logo img:hover {
+            opacity: 0.85;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: #3a5a54;
+            line-height: 1.7;
+            max-width: 350px;
+            margin-top: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(26, 58, 52, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a3a34;
+            text-decoration: none !important;
+            transition: all 0.3s;
+            border: 1px solid rgba(26, 58, 52, 0.08);
+        }
+
+        .social-links a:hover {
+            background: #d4a843;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.3);
+            border-color: #d4a843;
+        }
+
+        .footer-col h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a3a34;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #d4a843;
+            display: inline-block;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-col ul li a {
+            color: #3a5a54;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-col ul li a i {
+            font-size: 0.6rem;
+            color: #d4a843;
+            transition: 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #d4a843;
+            transform: translateX(5px);
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: #3a5a54;
+            line-height: 1.6;
+            list-style: none;
+        }
+
+        .contact-info li i {
+            color: #d4a843;
+            font-size: 1rem;
+            margin-top: 3px;
+            width: 18px;
+        }
+
+        .contact-info li a {
+            color: #3a5a54;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            transition: 0.3s;
+        }
+
+        .contact-info li a:hover {
+            color: #d4a843;
+        }
+
+        .newsletter {
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        .newsletter h4 {
+            font-size: 0.85rem;
+            color: #1a3a34;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            background: rgba(26, 58, 52, 0.04);
+            color: #1a3a34;
+            outline: none;
+            min-width: 180px;
+            border: 1px solid rgba(26, 58, 52, 0.08);
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        .newsletter-input::placeholder {
+            color: #6b8a84;
+        }
+
+        .newsletter-input:focus {
+            background: white;
+            border-color: #d4a843;
+            box-shadow: 0 0 0 4px rgba(212, 168, 67, 0.1);
+        }
+
+        .newsletter-input.error {
+            border-color: #ff6b6b;
+        }
+
+        .newsletter-btn {
+            background: #d4a843;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(212, 168, 67, 0.2);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.3);
+            background: #c49a3d;
+        }
+
+        .newsletter-error {
+            font-size: 0.7rem;
+            color: #ff6b6b;
+            margin-top: 8px;
+            display: none;
+            text-align: left;
+        }
+
+        .newsletter-error.show {
+            display: block;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(26, 58, 52, 0.06);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #5a7a74;
+        }
+
+        .copyright i {
+            color: #d4a843;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links a {
+            color: #5a7a74;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #d4a843;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 35px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                padding: 40px 20px 25px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: left;
+            }
+
+            .footer-brand {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .footer-brand p {
+                max-width: 100%;
+                text-align: left;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+            }
+
+            .footer-col h3 {
+                display: inline-block;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .newsletter-input {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+
+            .footer-logo img {
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-container {
+                padding: 30px 16px 20px;
+            }
+
+            .footer-grid {
+                gap: 25px;
+            }
+
+            .footer-brand p {
+                font-size: 0.85rem;
+            }
+
+            .footer-col h3 {
+                font-size: 0.95rem;
+            }
+
+            .footer-col ul li a {
+                font-size: 0.85rem;
+            }
+
+            .contact-info li {
+                font-size: 0.85rem;
+            }
+
+            .copyright {
+                font-size: 0.7rem;
+            }
+
+            .footer-bottom-links a {
+                font-size: 0.7rem;
+            }
+
+            .footer-bottom-links {
+                gap: 16px;
+            }
+
+            .footer-logo img {
+                height: 100px;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f0f4f8; }
+        ::-webkit-scrollbar-thumb { background: #d4a843; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c49a3d; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="Stackly.webp" alt="Stackly" onerror="this.src='https://placehold.co/180x55/d4a843/white?text=STACKLY'">
+                    </a>
+                    <p>Your trusted partner in transport and logistics solutions. We deliver excellence across road, sea, and air freight with reliability and speed.</p>
+                    <div class="social-links">
+                        <a href="404.html"><i class="fab fa-facebook-f"></i></a>
+                        <a href="404.html"><i class="fab fa-twitter"></i></a>
+                        <a href="404.html"><i class="fab fa-instagram"></i></a>
+                        <a href="404.html"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="404.html"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="fleet.html"><i class="fas fa-chevron-right"></i> Fleet</a></li>
+                        <li><a href="tracking.html"><i class="fas fa-chevron-right"></i> Tracking</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Services -->
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Road Freight</a></li>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Sea Freight</a></li>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Air Freight</a></li>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Warehousing</a></li>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> 3PL Services</a></li>
+                        <li><a href="404.html"><i class="fas fa-chevron-right"></i> Cold Chain</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact & Newsletter -->
+                <div class="footer-col">
+                    <h3>Get In Touch</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Koppa Rd, SNN Raj Serenity,<br>Bengaluru - 560068</span></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+917010792745">+91 70107 92745</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@stackly.com">info@stackly.com</a></li>
+                        <li><i class="fas fa-clock"></i> Mon - Fri: 9:30 AM - 6:30 PM</li>
+                    </ul>
+
+                    <div class="newsletter">
+                        <h4>Subscribe for Updates</h4>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" class="newsletter-input" id="footerEmail">
+                            <button class="newsletter-btn" id="footerSubscribeBtn">Subscribe</button>
+                        </div>
+                        <div id="footerEmailError" class="newsletter-error">Please enter a valid email address</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Stackly Logistics. All rights reserved. | Made with <i class="fas fa-heart"></i> for reliable transport
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="404.html">Terms of Service</a>
+                    <a href="404.html">Privacy Policy</a>
+                    <a href="404.html">Cookie Policy</a>
+                    <a href="404.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        // ===== Newsletter Subscription =====
+        const subscribeBtn = document.getElementById('footerSubscribeBtn');
+        const emailInput = document.getElementById('footerEmail');
+        const emailError = document.getElementById('footerEmailError');
+
+        function validateEmail(email) {
+            return /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(email);
+        }
+
+        if (subscribeBtn) {
+            subscribeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = emailInput.value.trim();
+
+                if (!email) {
+                    emailError.classList.add('show');
+                    emailError.textContent = 'Please enter your email address';
+                    emailInput.classList.add('error');
+                } else if (!validateEmail(email)) {
+                    emailError.classList.add('show');
+                    emailError.textContent = 'Please enter a valid email address (e.g., name@domain.com)';
+                    emailInput.classList.add('error');
+                } else {
+                    emailError.classList.remove('show');
+                    emailInput.classList.remove('error');
+                    window.location.href = '404.html';
+                }
+            });
+        }
+
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    emailError.classList.remove('show');
+                    this.classList.remove('error');
+                }
+            });
+        }
+
+        console.log('🚛 Transport & Logistics Footer Loaded');
+        console.log('📍 Teal + Gold Theme');
+    </script>
+
+</body>
+</html>

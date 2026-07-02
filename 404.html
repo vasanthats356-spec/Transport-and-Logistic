@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Transport and Logistics- 404 page is not found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e8f4f0;
+            color: #1a3a34;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 168, 67, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 168, 67, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(26, 58, 52, 0.02) 0%, transparent 70%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5%, 5%) rotate(2deg); }
+            75% { transform: translate(-5%, -5%) rotate(-2deg); }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 620px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 60px 50px 50px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(26, 58, 52, 0.08);
+            border: 1px solid rgba(212, 168, 67, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .container:hover {
+            box-shadow: 0 40px 80px rgba(26, 58, 52, 0.12);
+            border-color: rgba(212, 168, 67, 0.25);
+            transition: all 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ===== DECORATIVE SHAPES ===== */
+        .deco-shapes {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .deco-shapes .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 168, 67, 0.15);
+            animation: spin 20s linear infinite;
+        }
+
+        .deco-shapes .circle:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            animation-duration: 25s;
+        }
+
+        .deco-shapes .circle:nth-child(2) {
+            width: 75%;
+            height: 75%;
+            top: 12.5%;
+            left: 12.5%;
+            border-color: rgba(212, 168, 67, 0.1);
+            border-style: dashed;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        .deco-shapes .circle:nth-child(3) {
+            width: 50%;
+            height: 50%;
+            top: 25%;
+            left: 25%;
+            border-color: rgba(212, 168, 67, 0.08);
+            animation-duration: 10s;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== ICON ===== */
+        .truck-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: #d4a843;
+            animation: truckBounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes truckBounce {
+            0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) scale(1.08) rotate(-3deg); }
+        }
+
+        /* ===== 404 NUMBER ===== */
+        .four04 {
+            font-size: 100px;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #d4a843, #c49a3d, #d4a843);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: 6px;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ===== STATUS BADGE ===== */
+        .status-badge {
+            display: inline-block;
+            background: rgba(212, 168, 67, 0.1);
+            color: #d4a843;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            animation: pulseBadge 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* ===== HEADINGS ===== */
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3a34;
+            margin-bottom: 12px;
+        }
+
+        h2 span {
+            color: #d4a843;
+        }
+
+        p {
+            color: #3a5a54;
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 450px;
+            margin: 0 auto 30px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .button-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #d4a843, #c49a3d);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.25);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.35);
+        }
+
+        .btn-home i {
+            transition: 0.3s;
+        }
+
+        .btn-home:hover i {
+            transform: translateX(-4px);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: transparent;
+            border: 2px solid #d4a843;
+            color: #d4a843;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-back:hover {
+            background: #d4a843;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 168, 67, 0.2);
+        }
+
+        .btn-back:hover i {
+            transform: translateX(-4px);
+        }
+
+        /* ===== QUICK LINKS ===== */
+        .quick-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-top: 25px;
+            border-top: 1px solid rgba(26, 58, 52, 0.06);
+        }
+
+        .quick-link {
+            color: #5a7a74;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-link i {
+            color: #d4a843;
+            font-size: 0.7rem;
+        }
+
+        .quick-link:hover {
+            color: #d4a843;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(212, 168, 67, 0.15);
+            border-radius: 50%;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 14s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 12s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 16s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 13s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 15s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 11s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; animation-duration: 14s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; animation-duration: 12s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; animation-duration: 18s; }
+        .particle:nth-child(11) { left: 45%; animation-delay: 0.5s; animation-duration: 13s; }
+        .particle:nth-child(12) { left: 75%; animation-delay: 4s; animation-duration: 16s; }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            25% { transform: translateY(-100px) scale(1.5); opacity: 0.6; }
+            50% { transform: translateY(-200px) scale(0.5); opacity: 0.2; }
+            75% { transform: translateY(-300px) scale(1.2); opacity: 0.8; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px 30px;
+                border-radius: 24px;
+            }
+
+            .four04 {
+                font-size: 72px;
+            }
+
+            .deco-shapes {
+                width: 110px;
+                height: 110px;
+            }
+
+            .deco-shapes .truck-icon {
+                font-size: 44px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-home,
+            .btn-back {
+                justify-content: center;
+                padding: 12px 24px;
+            }
+
+            .quick-links {
+                gap: 14px;
+            }
+
+            .quick-link {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 18px 25px;
+            }
+
+            .four04 {
+                font-size: 56px;
+            }
+
+            .deco-shapes {
+                width: 90px;
+                height: 90px;
+            }
+
+            .deco-shapes .truck-icon {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+
+            .status-badge {
+                font-size: 0.65rem;
+                padding: 4px 14px;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f4f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4a843;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c49a3d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== FLOATING PARTICLES ===== -->
+    <div class="particles">
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+    </div>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+
+        <!-- Decorative Shapes -->
+        <div class="deco-shapes">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="truck-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+        </div>
+
+        <!-- Status Badge -->
+        <div class="status-badge">
+            <i class="fas fa-map-pin" style="margin-right:6px;"></i> Page Not Found
+        </div>
+
+        <!-- 404 Number -->
+        <div class="four04">404</div>
+
+        <!-- Heading -->
+        <h2>Oops! <span>Lost in Transit</span></h2>
+
+        <!-- Description -->
+        <p>We couldn't find the page you're looking for. It might have been moved, deleted, or never existed. Let's get you back on track!</p>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+            <button class="btn-back" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </button>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="services.html" class="quick-link">
+                <i class="fas fa-truck"></i> Services
+            </a>
+            <a href="tracking.html" class="quick-link">
+                <i class="fas fa-map-pin"></i> Track Shipment
+            </a>
+            <a href="fleet.html" class="quick-link">
+                <i class="fas fa-route"></i> Our Fleet
+            </a>
+            <a href="contact.html" class="quick-link">
+                <i class="fas fa-envelope"></i> Contact Support
+            </a>
+            <a href="javascript:void(0)" class="quick-link" onclick="reportIssue()">
+                <i class="fas fa-flag"></i> Report Issue
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        // ===== Report Issue =====
+        function reportIssue() {
+            alert('📝 Report Broken Link\n\nThank you for helping us improve Stackly Logistics!\n\nURL: ' + window.location.href + '\nTime: ' + new Date().toLocaleString() + '\n\nOur team will review this issue.');
+        }
+
+        // ===== Keyboard Shortcuts =====
+        document.addEventListener('keydown', function(e) {
+            // Alt + Left Arrow = Go Back
+            if (e.altKey && e.key === 'ArrowLeft') {
+                e.preventDefault();
+                window.history.back();
+            }
+            // Alt + H = Go Home
+            if (e.altKey && (e.key === 'h' || e.key === 'H')) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            }
+        });
+
+        // ===== Console Message =====
+        console.log('%c🚛 Stackly Logistics | 404 Error', 'color: #d4a843; font-size: 16px; font-weight: bold;');
+        console.log('%c📍 We\'ll get you back on track!', 'color: #1a3a34; font-size: 12px;');
+
+        // ===== Track 404 Error =====
+        console.log('%c📊 Page: ' + window.location.pathname, 'color: #5a7a74; font-size: 11px;');
+    </script>
+
+</body>
+</html>

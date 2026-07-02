@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Transport and Logistics - Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      color: #1a3a34;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: #e8f4f0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      border-bottom: 3px solid #d4a843;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-area img {
+      height: 95px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #4a5a6e;
+      cursor: pointer;
+      border-radius: 30px;
+      transition: all 0.3s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .nav-btn i {
+      margin-right: 8px;
+      color: #d4a843;
+    }
+
+    .nav-btn:hover {
+      background: rgba(212, 168, 67, 0.1);
+      color: #d4a843;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #d4a843, #c49a3d);
+      color: white;
+      box-shadow: 0 4px 15px rgba(212, 168, 67, 0.3);
+    }
+
+    .nav-btn.active i {
+      color: white;
+    }
+
+    .role-badge {
+      background: linear-gradient(135deg, #d4a843, #c49a3d);
+      color: white;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .right-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .back-home-btn, .logout-btn {
+      background: transparent;
+      border: 2px solid #d4a843;
+      padding: 6px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    .back-home-btn {
+      background: white;
+      color: #d4a843;
+    }
+
+    .back-home-btn:hover {
+      background: #d4a843;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(212, 168, 67, 0.25);
+    }
+
+    .logout-btn {
+      background: #d4a843;
+      color: white;
+      border-color: #d4a843;
+      box-shadow: 0 4px 15px rgba(212, 168, 67, 0.2);
+    }
+
+    .logout-btn:hover {
+      background: #c49a3d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 168, 67, 0.3);
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 24px;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    .dashboard-title {
+      margin-bottom: 24px;
+      border-left: 5px solid #d4a843;
+      padding-left: 20px;
+    }
+
+    .dashboard-title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a3a34;
+    }
+
+    .dashboard-title p {
+      color: #5a7a74;
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.08), rgba(212, 168, 67, 0.04));
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(212, 168, 67, 0.15);
+    }
+
+    .welcome-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a3a34;
+    }
+
+    .welcome-section p {
+      color: #5a7a74;
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    /* ===== STATS ===== */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      border: 1px solid rgba(212, 168, 67, 0.12);
+      transition: all 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(212, 168, 67, 0.15);
+      border-color: #d4a843;
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.15), rgba(212, 168, 67, 0.05));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #d4a843;
+    }
+
+    .stat-content h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #d4a843;
+    }
+
+    .stat-content p {
+      color: #5a7a74;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* ===== QUICK STATS ===== */
+    .quick-stats-bar {
+      background: white;
+      border-radius: 60px;
+      padding: 14px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+    }
+
+    .quick-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quick-stat-label {
+      color: #5a7a74;
+      font-size: 0.8rem;
+    }
+
+    .quick-stat-value {
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.1), rgba(212, 168, 67, 0.05));
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: #d4a843;
+    }
+
+    /* ===== CHARTS ===== */
+    .charts-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .chart-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      width: 100%;
+    }
+
+    .chart-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #1a3a34;
+    }
+
+    .chart-card h3 i {
+      color: #d4a843;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 180px;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto !important;
+      width: 100% !important;
+    }
+
+    /* ===== DASHBOARD GRID ===== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a3a34;
+    }
+
+    .section-header a {
+      color: #d4a843;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .section-header a:hover {
+      color: #c49a3d;
+    }
+
+    /* ===== APPROVAL CARDS ===== */
+    .approval-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .approval-item {
+      background: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+      transition: all 0.2s;
+    }
+
+    .approval-item:hover {
+      border-color: #d4a843;
+      box-shadow: 0 4px 15px rgba(212, 168, 67, 0.08);
+    }
+
+    .approval-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .approval-id {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #1a3a34;
+    }
+
+    .approval-badge {
+      background: rgba(212, 168, 67, 0.1);
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      color: #d4a843;
+      font-weight: 600;
+    }
+
+    .approval-desc {
+      font-size: 0.82rem;
+      color: #5a7a74;
+      margin-bottom: 10px;
+    }
+
+    .approval-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .approval-amount {
+      font-weight: 800;
+      color: #d4a843;
+      font-size: 0.85rem;
+    }
+
+    .status-badge {
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+
+    .status-approved { background: #e8f5e9; color: #2e7d32; }
+    .status-pending { background: #fff3e0; color: #f57c00; }
+    .status-review { background: #e3f2fd; color: #1976d2; }
+    .status-delayed { background: #fce4ec; color: #c62828; }
+
+    /* ===== RIGHT COLUMN ===== */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+    }
+
+    .info-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1a3a34;
+    }
+
+    .info-card h3 i {
+      color: #d4a843;
+    }
+
+    .admin-list {
+      list-style: none;
+    }
+
+    .admin-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(212, 168, 67, 0.06);
+    }
+
+    .admin-item:last-child {
+      border-bottom: none;
+    }
+
+    .admin-name {
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .admin-role {
+      background: rgba(212, 168, 67, 0.1);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      color: #d4a843;
+      font-weight: 600;
+    }
+
+    .queue-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(212, 168, 67, 0.06);
+    }
+
+    .queue-item:last-child {
+      border-bottom: none;
+    }
+
+    .queue-title {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .queue-sub {
+      font-size: 0.65rem;
+      color: #5a7a74;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .action-btn {
+      background: #f5f9f7;
+      border: 1px solid rgba(212, 168, 67, 0.12);
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      color: #1a3a34;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-btn i {
+      color: #d4a843;
+    }
+
+    .action-btn:hover {
+      background: #d4a843;
+      color: white;
+      border-color: #d4a843;
+      transform: translateY(-2px);
+    }
+
+    .action-btn:hover i {
+      color: white;
+    }
+
+    /* ===== CONTENT SECTIONS ===== */
+    .content-section {
+      display: block;
+    }
+
+    .content-section.hidden {
+      display: none;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .enhanced-card {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.04), #ffffff);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(212, 168, 67, 0.1);
+    }
+
+    .enhanced-card h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #1a3a34;
+    }
+
+    .enhanced-card p {
+      color: #4a5a6e;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .enhanced-card .highlight {
+      color: #d4a843;
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #f0f4f8;
+      border-radius: 10px;
+      margin: 6px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #d4a843, #c49a3d);
+      border-radius: 10px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .logo-area { justify-content: center; }
+      .nav-links { justify-content: center; }
+      .right-actions { justify-content: center; }
+    }
+
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .charts-row { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .logo-area img { height: 85px; }
+      .quick-stats-bar { border-radius: 24px; flex-direction: column; align-items: stretch; }
+      .quick-stat-item { justify-content: space-between; }
+      .nav-btn { padding: 6px 14px; font-size: 0.75rem; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 16px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .charts-row { grid-template-columns: 1fr; }
+      .chart-container { min-height: 200px; }
+      .dashboard-title h1 { font-size: 22px; }
+      .approval-meta { flex-direction: column; align-items: flex-start; }
+      .welcome-section { padding: 14px 16px; }
+      .stat-card { padding: 14px; }
+      .quick-stats-bar { padding: 14px; }
+      .role-badge { font-size: 0.55rem; padding: 3px 10px; }
+      .back-home-btn, .logout-btn { padding: 5px 14px; font-size: 0.7rem; }
+    }
+
+    @media (max-width: 400px) {
+      .right-actions { flex-direction: column; align-items: stretch; }
+      .back-home-btn, .logout-btn { justify-content: center; }
+      .logo-area img { height: 40px; }
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f0f4f8; }
+    ::-webkit-scrollbar-thumb { background: #d4a843; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c49a3d; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-container">
+    <a href="index.html" class="logo-area">
+      <img src="Stackly.webp" alt="Stackly" onerror="this.src='https://placehold.co/180x55/d4a843/white?text=STACKLY'">
+    </a>
+    <div class="nav-links">
+      <button class="nav-btn active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</button>
+      <button class="nav-btn" data-section="drivers"><i class="fas fa-users-cog"></i> Drivers</button>
+      <button class="nav-btn" data-section="shipments"><i class="fas fa-truck"></i> Shipments</button>
+      <button class="nav-btn" data-section="routes"><i class="fas fa-route"></i> Routes</button>
+      <button class="nav-btn" data-section="reports"><i class="fas fa-chart-bar"></i> Reports</button>
+    </div>
+    <div class="right-actions">
+      <button class="back-home-btn" id="backHomeBtn"><i class="fas fa-home"></i> Home</button>
+      <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="dashboard-title">
+    <h1>🏛️ Logistics Admin Dashboard</h1>
+    <p>Oversee platform operations, manage drivers, and track shipments</p>
+  </div>
+
+  <!-- ===== DASHBOARD SECTION ===== -->
+  <div id="dashboard-section" class="content-section">
+    <div class="welcome-section">
+      <h2>Welcome back, Admin Rajesh! 👋</h2>
+      <p>Platform performance overview - 18 new drivers joined this week</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-content">
+          <h3 id="statDrivers">1,247</h3>
+          <p>Total Drivers</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+        <div class="stat-content">
+          <h3 id="statRevenue">₹4.2Cr</h3>
+          <p>Total Revenue (MTD)</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+        <div class="stat-content">
+          <h3 id="statShipments">12.5K</h3>
+          <p>Total Shipments</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-content">
+          <h3 id="statDelivered">98.7%</h3>
+          <p>Delivery Success Rate</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-stats-bar">
+      <div class="quick-stat-item">
+        <span class="quick-stat-label">Pending Approvals</span>
+        <span class="quick-stat-value" id="quickPending">23</span>
+      </div>
+      <div class="quick-stat-item">
+        <span class="quick-stat-label">New Drivers (Week)</span>
+        <span class="quick-stat-value" id="quickNewDrivers">18</span>
+      </div>
+      <div class="quick-stat-item">
+        <span class="quick-stat-label">On-Time Delivery</span>
+        <span class="quick-stat-value" id="quickOnTime">96.2%</span>
+      </div>
+      <div class="quick-stat-item">
+        <span class="quick-stat-label">Fleet Uptime</span>
+        <span class="quick-stat-value" id="quickUptime">99.98%</span>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3><i class="fas fa-chart-line"></i> Revenue Trend (Last 7 Days)</h3>
+        <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3><i class="fas fa-chart-pie"></i> Shipment Categories</h3>
+        <div class="chart-container"><canvas id="categoryChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3><i class="fas fa-chart-bar"></i> New Drivers</h3>
+        <div class="chart-container"><canvas id="driversChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div>
+        <div class="section-header">
+          <h2>📋 Pending Approvals</h2>
+          <a href="404.html">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="approval-cards">
+          <div class="approval-item">
+            <div class="approval-header">
+              <span class="approval-id">#DRIVER-12345</span>
+              <span class="approval-badge">New Driver</span>
+            </div>
+            <div class="approval-desc">Vikram Singh - License verification pending</div>
+            <div class="approval-meta">
+              <div class="approval-amount">License: #DL-2024-001</div>
+              <div class="approval-status"><span class="status-badge status-pending">Pending Review</span><span style="margin-left:12px;">Mar 15, 2024</span></div>
+            </div>
+          </div>
+          <div class="approval-item">
+            <div class="approval-header">
+              <span class="approval-id">#SHIP-12346</span>
+              <span class="approval-badge">Shipment Approval</span>
+            </div>
+            <div class="approval-desc">Electronics - Bengaluru to Mumbai</div>
+            <div class="approval-meta">
+              <div class="approval-amount">Value: ₹2,50,000</div>
+              <div class="approval-status"><span class="status-badge status-review">Under Review</span><span style="margin-left:12px;">Mar 14, 2024</span></div>
+            </div>
+          </div>
+          <div class="approval-item">
+            <div class="approval-header">
+              <span class="approval-id">#ROUTE-12347</span>
+              <span class="approval-badge">Route Approval</span>
+            </div>
+            <div class="approval-desc">New Route - Delhi to Chennai via Nagpur</div>
+            <div class="approval-meta">
+              <div class="approval-amount">Distance: 2,200 km</div>
+              <div class="approval-status"><span class="status-badge status-pending">Awaiting Approval</span><span style="margin-left:12px;">Mar 12, 2024</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="info-card">
+          <h3><i class="fas fa-exclamation-triangle"></i> Platform Alerts</h3>
+          <div class="admin-list">
+            <div class="admin-item">
+              <span class="admin-name">Server Maintenance</span>
+              <span class="admin-role">Scheduled</span>
+            </div>
+            <div class="admin-item">
+              <span class="admin-name">New Driver Registrations</span>
+              <span class="admin-role">18 pending</span>
+            </div>
+            <div class="admin-item">
+              <span class="admin-name">Payment Gateway Issue</span>
+              <span class="admin-role">Resolved</span>
+            </div>
+          </div>
+          <a href="404.html" class="action-btn" style="margin-top:10px;">View All Alerts</a>
+        </div>
+        <div class="info-card">
+          <h3><i class="fas fa-clock"></i> Recent Activities</h3>
+          <div class="queue-item">
+            <div><div class="queue-title">New driver registered</div><div class="queue-sub">Vikram Singh - 2 hours ago</div></div>
+            <span style="color:#d4a843;">✅</span>
+          </div>
+          <div class="queue-item">
+            <div><div class="queue-title">Shipment completed</div><div class="queue-sub">15 deliveries - 4 hours ago</div></div>
+            <span style="color:#d4a843;">✅</span>
+          </div>
+          <div class="queue-item">
+            <div><div class="queue-title">Route optimized</div><div class="queue-sub">Delhi-Mumbai route - 6 hours ago</div></div>
+            <span style="color:#d4a843;">✅</span>
+          </div>
+          <a href="404.html" class="action-btn" style="margin-top:10px;">View All Activities</a>
+        </div>
+        <div class="info-card">
+          <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+          <div class="action-buttons">
+            <a href="404.html" class="action-btn"><i class="fas fa-user-plus"></i> Add Admin</a>
+            <a href="404.html" class="action-btn"><i class="fas fa-chart-line"></i> Generate Report</a>
+            <a href="404.html" class="action-btn"><i class="fas fa-cog"></i> Platform Settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DRIVERS SECTION ===== -->
+  <div id="drivers-section" class="content-section hidden">
+    <div class="dashboard-title">
+      <h1>👥 Driver Management</h1>
+      <p>Manage all registered drivers on the platform</p>
+    </div>
+    <div class="grid-2">
+      <div class="enhanced-card">
+        <h3>Top Drivers by Trips</h3>
+        <p><span class="highlight">Vikram Singh</span> - 1,247 trips</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div>
+        <p><span class="highlight">Priya Mehta</span> - 986 trips</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+        <p><span class="highlight">Amit Kumar</span> - 845 trips</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:53%"></div></div>
+        <a href="404.html" class="action-btn" style="margin-top:12px;">View All Drivers</a>
+      </div>
+      <div class="enhanced-card">
+        <h3>Driver Registrations</h3>
+        <p>This Week: <span class="highlight">18 drivers</span></p>
+        <p>This Month: <span class="highlight">62 drivers</span></p>
+        <p>Pending Verification: <span class="highlight">12 drivers</span></p>
+        <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        <a href="404.html" class="action-btn" style="margin-top:12px;">Review Registrations</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SHIPMENTS SECTION ===== -->
+  <div id="shipments-section" class="content-section hidden">
+    <div class="dashboard-title">
+      <h1>📦 Shipment Management</h1>
+      <p>Oversee all shipments across categories</p>
+    </div>
+    <div class="grid-2">
+      <div class="enhanced-card">
+        <h3>Shipment Categories</h3>
+        <p>FMCG - 4,234 shipments</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        <p>Electronics - 3,892 shipments</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+        <p>Pharma - 2,456 shipments</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:39%"></div></div>
+        <a href="404.html" class="action-btn" style="margin-top:12px;">Manage Categories</a>
+      </div>
+      <div class="enhanced-card">
+        <h3>Shipment Moderation</h3>
+        <p>Pending Approval: <span class="highlight">156 shipments</span></p>
+        <p>Flagged for Review: <span class="highlight">23 shipments</span></p>
+        <p>Recently Approved: <span class="highlight">342 shipments</span></p>
+        <div class="progress-bar"><div class="progress-fill" style="width:18%"></div></div>
+        <a href="404.html" class="action-btn" style="margin-top:12px;">Review Shipments</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ROUTES SECTION ===== -->
+  <div id="routes-section" class="content-section hidden">
+    <div class="dashboard-title">
+      <h1>📍 Route Management</h1>
+      <p>Oversee all delivery routes across India</p>
+    </div>
+    <div class="approval-cards">
+      <div class="approval-item">
+        <div class="approval-header">
+          <span class="approval-id">#RT-001</span>
+          <span class="approval-badge">Express Route</span>
+        </div>
+        <div class="approval-desc">Bengaluru to Mumbai - 1,050 km</div>
+        <div class="approval-meta">
+          <div class="approval-amount">Avg Time: 18 hrs</div>
+          <div class="approval-status"><span class="status-badge status-active">Active</span><a href="404.html" class="action-btn" style="padding:3px 12px; margin-left:12px;">View Details</a></div>
+        </div>
+      </div>
+      <div class="approval-item">
+        <div class="approval-header">
+          <span class="approval-id">#RT-002</span>
+          <span class="approval-badge">Standard Route</span>
+        </div>
+        <div class="approval-desc">Delhi to Chennai - 2,200 km</div>
+        <div class="approval-meta">
+          <div class="approval-amount">Avg Time: 36 hrs</div>
+          <div class="approval-status"><span class="status-badge status-pending">Under Review</span><a href="404.html" class="action-btn" style="padding:3px 12px; margin-left:12px;">Review Route</a></div>
+        </div>
+      </div>
+      <div class="approval-item">
+        <div class="approval-header">
+          <span class="approval-id">#RT-003</span>
+          <span class="approval-badge">New Route</span>
+        </div>
+        <div class="approval-desc">Mumbai to Hyderabad - 1,400 km</div>
+        <div class="approval-meta">
+          <div class="approval-amount">Avg Time: 24 hrs</div>
+          <div class="approval-status"><span class="status-badge status-pending">Awaiting Approval</span><a href="404.html" class="action-btn" style="padding:3px 12px; margin-left:12px;">Approve Route</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REPORTS SECTION ===== -->
+  <div id="reports-section" class="content-section hidden">
+    <div class="dashboard-title">
+      <h1>📊 Reports & Analytics</h1>
+      <p>Generate and download platform reports</p>
+    </div>
+    <div class="grid-2">
+      <div class="enhanced-card">
+        <h3>Monthly Summary</h3>
+        <p>Total Revenue: <span class="highlight">₹4.2Cr</span></p>
+        <p>Total Shipments: <span class="highlight">18,234</span></p>
+        <p>New Drivers: <span class="highlight">62</span></p>
+        <p>Delivery Success: <span class="highlight">98.7%</span></p>
+        <a href="404.html" class="action-btn" style="margin-top:12px;">Download Report</a>
+      </div>
+      <div class="enhanced-card">
+        <h3>Quick Reports</h3>
+        <div class="action-buttons" style="flex-direction:column;">
+          <a href="404.html" class="action-btn"><i class="fas fa-file-pdf"></i> Driver Performance Report</a>
+          <a href="404.html" class="action-btn"><i class="fas fa-file-excel"></i> Shipment Analytics</a>
+          <a href="404.html" class="action-btn"><i class="fas fa-file-alt"></i> Financial Summary</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const barColors = ['#d4a843', '#c49a3d', '#e8c87a', '#f0dca0', '#f5e8c0'];
+
+    // ===== REVENUE CHART =====
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{ label: 'Revenue (₹ Lakhs)', data: [32, 45, 38, 52, 61, 78, 92], borderColor: '#d4a843', backgroundColor: 'rgba(212, 168, 67, 0.1)', tension: 0.4, fill: true, borderWidth: 3 }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, aspectRatio: 1.5, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#f0f4f8' } }, x: { grid: { display: false } } } }
+    });
+
+    // ===== CATEGORY CHART =====
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(categoryCtx, {
+      type: 'pie',
+      data: {
+        labels: ['FMCG', 'Electronics', 'Pharma', 'Automotive'],
+        datasets: [{ data: [35, 30, 20, 15], backgroundColor: ['#d4a843', '#c49a3d', '#e8c87a', '#f0dca0'], borderWidth: 0 }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, aspectRatio: 1.5, plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } } }
+    });
+
+    // ===== DRIVERS CHART =====
+    const driversCtx = document.getElementById('driversChart').getContext('2d');
+    new Chart(driversCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{ label: 'New Drivers', data: [4, 6, 5, 8, 12, 15, 18], backgroundColor: barColors, borderRadius: 10, barPercentage: 0.7 }]
+      },
+      options: { responsive: true, maintainAspectRatio: true, aspectRatio: 1.5, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#f0f4f8' } }, x: { grid: { display: false } } } }
+    });
+
+    // ===== NAVIGATION =====
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const sections = {
+      dashboard: document.getElementById('dashboard-section'),
+      drivers: document.getElementById('drivers-section'),
+      shipments: document.getElementById('shipments-section'),
+      routes: document.getElementById('routes-section'),
+      reports: document.getElementById('reports-section')
+    };
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        navBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const section = this.getAttribute('data-section');
+        Object.values(sections).forEach(s => { if (s) s.classList.add('hidden'); });
+        if (sections[section]) {
+          sections[section].classList.remove('hidden');
+        }
+      });
+    });
+
+    // ===== BUTTONS =====
+    document.getElementById('backHomeBtn').addEventListener('click', () => window.location.href = 'index.html');
+    document.getElementById('logoutBtn').addEventListener('click', () => window.location.href = 'login.html');
+
+    // ===== LIVE UPDATES =====
+    function updateStats() {
+      document.getElementById('statDrivers').textContent = Math.floor(Math.random() * 200) + 1150;
+      document.getElementById('statRevenue').textContent = '₹' + (Math.random() * 2 + 3.5).toFixed(1) + 'Cr';
+      document.getElementById('statShipments').textContent = Math.floor(Math.random() * 1500) + 11800;
+      document.getElementById('statDelivered').textContent = (Math.random() * 1 + 98).toFixed(1) + '%';
+      document.getElementById('quickPending').textContent = Math.floor(Math.random() * 30) + 15;
+      document.getElementById('quickNewDrivers').textContent = Math.floor(Math.random() * 15) + 8;
+      document.getElementById('quickOnTime').textContent = (Math.random() * 2 + 95).toFixed(1) + '%';
+      document.getElementById('quickUptime').textContent = (Math.random() * 0.3 + 99.7).toFixed(2) + '%';
+    }
+    setInterval(updateStats, 8000);
+
+    console.log('%c🚛 Stackly Logistics | Admin Dashboard', 'color: #d4a843; font-size: 16px; font-weight: bold;');
+    console.log('%c📍 Platform management & analytics', 'color: #1a3a34; font-size: 12px;');
+  });
+</script>
+</body>
+</html>
